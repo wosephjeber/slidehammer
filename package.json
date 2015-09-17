@@ -1,0 +1,20 @@
+{
+  "name": "slide-hammer",
+  "version": "0.9.0",
+  "author": "Joseph Weber",
+  "engines": {
+    "node": ">= 0.8.0"
+  },
+  "description": "Experimental jQuery slider with hammer.js",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "devDependencies": {
+    "grunt": "^0.4.5",
+    "grunt-contrib-concat": "^0.5.1",
+    "grunt-contrib-sass": "^0.8.1",
+    "grunt-contrib-uglify": "^0.6.0",
+    "grunt-contrib-watch": "^0.6.1"
+  }
+}
