@@ -53,7 +53,8 @@
       } else {
         _this.currentSlide = _this.currentSlide.prev();
         _this.left = _this.currentSlide.index() * -_this.slideWidth;
-        _this.moveTo(_this.left, 500);
+        var time = (velocity < 0) ? (-1 / velocity) * _this.slideWidth : 500;
+        _this.moveTo(_this.left, time);
       }
     };
     
