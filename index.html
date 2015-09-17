@@ -8,6 +8,18 @@
     <link rel="stylesheet" href="dist/slidehammer.min.css">
     
     <style>
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+      }
+      
+      body {
+        color: #333;
+        font-family: Arial, sans-serif;
+      }
+    
       .contained {
         max-width: 640px
       }
@@ -25,6 +37,15 @@
         .padding-2x {
           padding: 20px;
         }
+      }
+      
+      .margin-top-2x {
+        margin-top: 40px;
+      }
+      
+      .stats {
+        padding: 20px;
+        background-color: #efeeea;
       }
     </style>
   </head>
@@ -47,7 +68,25 @@
           </div>
         </div>
       </div>
+      <div class="stats contained centered margin-top-2x">
+        <div class="stat">
+          Event type: <span class="stat-event"></span>
+        </div>
+        <div class="stat">
+          Delta X: <span class="stat-delta-x"></span> px
+        </div>
+        <div class="stat">
+          Slider offset: <span class="stat-offset"></span> px
+        </div>
+        <div class="stat">
+          Delta time: <span class="stat-delta-time"></span> ms
+        </div>
+        <div class="stat">
+          Velocity X: <span class="stat-velocity"></span> px/ms
+        </div>
+      </div>
     </section>
+    
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
     <script type="text/javascript" src="dist/hammer.min.js"></script>

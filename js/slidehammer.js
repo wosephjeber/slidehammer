@@ -83,6 +83,12 @@
             }
             break;
         }
+        
+        $('.stat-event').html(e.type);
+        $('.stat-delta-x').html(e.deltaX);
+        $('.stat-offset').html(_this.left);
+        $('.stat-delta-time').html(e.deltaTime);
+        $('.stat-velocity').html(e.velocityX);
       });
     };
     
