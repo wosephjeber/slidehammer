@@ -1,0 +1,102 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SlideHammer Demo</title>
+    
+    <link rel="stylesheet" href="dist/slidehammer.min.css">
+    
+    <style>
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+      }
+      
+      body {
+        color: #333;
+        font-family: Arial, sans-serif;
+      }
+    
+      .contained {
+        max-width: 640px
+      }
+      
+      .centered {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .padding-2x {
+        padding: 40px;
+      }
+      
+      @media (max-width: 480px) {
+        .padding-2x {
+          padding: 20px;
+        }
+      }
+      
+      .margin-top-2x {
+        margin-top: 40px;
+      }
+      
+      .stats {
+        padding: 20px;
+        background-color: #efeeea;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="padding-2x">
+      <div class="contained centered">
+        <h1>SlideHammer</h1>
+        <p>
+          A demo of an experimental slider using hammer.js.
+        </p>
+        <div class="slides">
+          <div class="slide-wrapper">
+            <div class="slide-container">
+              <div class="slide">
+                <img src="demo/otters.jpg" alt="" />
+              </div>
+              <div class="slide">
+                <img src="demo/red-panda-sleeping.jpg" alt="" />
+              </div>
+              <div class="slide">
+                <img src="demo/alpaca.jpg" alt="" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="stats contained centered margin-top-2x">
+        <div class="stat">
+          Event type: <span class="stat-event"></span>
+        </div>
+        <div class="stat">
+          Delta X: <span class="stat-delta-x"></span> px
+        </div>
+        <div class="stat">
+          Slider offset: <span class="stat-offset"></span> px
+        </div>
+        <div class="stat">
+          Delta time: <span class="stat-delta-time"></span> ms
+        </div>
+        <div class="stat">
+          Velocity X: <span class="stat-velocity"></span> px/ms
+        </div>
+      </div>
+    </section>
+    
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="dist/hammer.min.js"></script>
+    <script type="text/javascript" src="dist/slidehammer.min.js"></script>
+    <script type="text/javascript">
+      $('.slides').slidehammer();
+    </script>
+  </body>
+</html>
