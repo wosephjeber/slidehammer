@@ -42,7 +42,7 @@
       } else {
         _this.currentSlide = _this.currentSlide.next();
         _this.left = _this.currentSlide.index() * -_this.slideWidth;
-        var time = (velocity > 0) ? (1 / velocity) * _this.slideWidth : 500;
+        var time = (velocity > _this.thresholdVelocity) ? (1 / velocity) * _this.slideWidth : 500;
         _this.moveTo(_this.left, time);
       }
     };
@@ -53,7 +53,7 @@
       } else {
         _this.currentSlide = _this.currentSlide.prev();
         _this.left = _this.currentSlide.index() * -_this.slideWidth;
-        var time = (velocity < 0) ? (-1 / velocity) * _this.slideWidth : 500;
+        var time = (velocity < -_this.thresholdVelocity) ? (-1 / velocity) * _this.slideWidth : 500;
         _this.moveTo(_this.left, time);
       }
     };
