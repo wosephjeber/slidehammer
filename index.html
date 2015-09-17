@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <title>SlideHammer Demo</title>
     
-    <link rel="stylesheet" href="../dist/slidehammer.min.css">
+    <link rel="stylesheet" href="dist/slidehammer.min.css">
     
     <style>
       .contained {
@@ -25,16 +25,16 @@
     <section class="padding-2x">
       <div class="contained centered">
         <div class="slides">
-          <div class="slides-wrapper">
-            <div class="slides-container">
+          <div class="slide-wrapper">
+            <div class="slide-container">
               <div class="slide">
-                <img src="" alt="" />
+                <img src="demo/otters.jpg" alt="" />
               </div>
               <div class="slide">
-                <img src="" alt="" />
+                <img src="demo/red-panda-sleeping.jpg" alt="" />
               </div>
               <div class="slide">
-                <img src="" alt="" />
+                <img src="demo/alpaca.jpg" alt="" />
               </div>
             </div>
           </div>
@@ -43,6 +43,10 @@
     </section>
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="../dist/slidehammer.min.js"></script>
+    <script type="text/javascript" src="dist/hammer.min.js"></script>
+    <script type="text/javascript" src="dist/slidehammer.min.js"></script>
+    <script type="text/javascript">
+      $('.slides').slidehammer();
+    </script>
   </body>
 </html>
