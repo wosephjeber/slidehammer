@@ -97,6 +97,7 @@
     
     $(window).on('resize', function() {
       _this.sizeSlides();
+      _this.moveTo(_this.currentSlide.index() * -_this.slideWidth, 0);
     });
   };
 }(jQuery));
