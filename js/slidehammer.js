@@ -12,15 +12,18 @@ var SlideHammer = function(elem, options) {
   this.options = $.extend({
     thresholdPercentage: 0.33,
     thresholdVelocity: 0.5,
+    wrapper: '.slide-wrapper',
+    container: '.slide-container',
+    slide: '.slide',
     onInit: function() {},
     onSlideChange: function() {},
     onPan: function() {}
   }, options);
   
   this.elem = $(elem);
-  this.wrapper = elem.find('.slide-wrapper');
-  this.container = elem.find('.slide-container');
-  this.slides = elem.find('.slide');
+  this.wrapper = elem.find(this.options.wrapper);
+  this.container = elem.find(this.options.container);
+  this.slides = elem.find(this.options.slide);
   this.currentSlide = this.slides.first();
   this.slideWidth = null;
   this.left = 0;
