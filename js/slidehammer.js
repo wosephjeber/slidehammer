@@ -13,7 +13,8 @@ var SlideHammer = function(elem, options) {
     thresholdPercentage: 0.33,
     thresholdVelocity: 0.5,
     onInit: function() {},
-    onSlideChange: function() {}
+    onSlideChange: function() {},
+    onPan: function() {}
   }, options);
   
   this.elem = $(elem);
@@ -99,11 +100,7 @@ var SlideHammer = function(elem, options) {
           break;
       }
       
-      $('.stat-event').html(e.type);
-      $('.stat-delta-x').html(e.deltaX);
-      $('.stat-offset').html(_this.left);
-      $('.stat-delta-time').html(e.deltaTime);
-      $('.stat-velocity').html(e.velocityX);
+      _this.options.onPan.call(_this, e);
     });
   };
   
