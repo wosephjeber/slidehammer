@@ -127,8 +127,8 @@ var SlideHammer = function(elem, options) {
     
     _this.wrapper.css({
       'height': height,
-      'transition-duration': transitionTime ? (transitionTime + 'ms') : '500ms',
-      '-webkit-transition-duration': transitionTime ? (transitionTime + 'ms') : '500ms'
+      'transition-duration': transitionTime ? (transitionTime + 'ms') : '0ms',
+      '-webkit-transition-duration': transitionTime ? (transitionTime + 'ms') : '0ms'
     });
   }
   
