@@ -65,6 +65,13 @@
       }
     };
     
+    this.slideTo = function(index) {
+      _this.currentSlide = _this.slides.eq(index);
+      _this.left = _this.currentSlide.index() * -_this.slideWidth;
+      _this.moveTo(_this.left, 500);
+      _this.options.onSlideChange.call(_this);
+    };
+    
     this.initTouch = function() {
       var touch = new Hammer.Manager(this.elem[0]);
     
