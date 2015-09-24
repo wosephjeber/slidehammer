@@ -100,6 +100,13 @@
         onSlideChange: function() {
           var slider = this;
           console.log('Slid to ' + (slider.currentSlide.index() + 1) + ' of ' + slider.slides.length);
+        },
+        onPan: function(e) {
+          $('.stat-event').html(e.type);
+          $('.stat-delta-x').html(e.deltaX);
+          $('.stat-offset').html(this.left);
+          $('.stat-delta-time').html(e.deltaTime);
+          $('.stat-velocity').html(e.velocityX);
         }
       });
     </script>
