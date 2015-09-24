@@ -25,6 +25,7 @@
   float: left;
 }
 .slides .slide img {
+  display: block;
   width: 100%;
   height: auto;
   pointer-events: none;
