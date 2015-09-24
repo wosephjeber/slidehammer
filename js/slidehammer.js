@@ -10,7 +10,9 @@
     
     this.options = $.extend({
       thresholdPercentage: 0.33,
-      thresholdVelocity: 0.5
+      thresholdVelocity: 0.5,
+      onInit: function() {},
+      onSlideChange: function() {}
     }, options);
     
     this.elem = $(elem);
@@ -47,6 +49,7 @@
         _this.left = _this.currentSlide.index() * -_this.slideWidth;
         var time = (velocity > _this.options.thresholdVelocity) ? (1 / velocity) * _this.slideWidth : 500;
         _this.moveTo(_this.left, time);
+        _this.options.onSlideChange.call(_this);
       }
     };
     
@@ -58,6 +61,7 @@
         _this.left = _this.currentSlide.index() * -_this.slideWidth;
         var time = (velocity < -_this.options.thresholdVelocity) ? (-1 / velocity) * _this.slideWidth : 500;
         _this.moveTo(_this.left, time);
+        _this.options.onSlideChange.call(_this);
       }
     };
     
@@ -97,6 +101,8 @@
     
     this.sizeSlides();
     this.initTouch();
+    
+    this.options.onInit.call(this);
     
     $(window).on('resize', function() {
       _this.sizeSlides();

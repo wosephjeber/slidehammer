@@ -96,7 +96,12 @@
     <script type="text/javascript" src="dist/hammer.min.js"></script>
     <script type="text/javascript" src="dist/slidehammer.min.js"></script>
     <script type="text/javascript">
-      $('.slides').slidehammer();
+      $('.slides').slidehammer({
+        onSlideChange: function() {
+          var slider = this;
+          console.log('Slid to ' + (slider.currentSlide.index() + 1) + ' of ' + slider.slides.length);
+        }
+      });
     </script>
   </body>
 </html>
