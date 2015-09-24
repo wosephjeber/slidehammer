@@ -8,6 +8,7 @@
 
 var SlideHammer = function(elem, options) {
   var _this = this;
+  var touch = new Hammer.Manager(elem[0]);
   
   this.options = $.extend({
     thresholdPercentage: 0.33,
@@ -16,6 +17,7 @@ var SlideHammer = function(elem, options) {
     container: '.slide-container',
     slide: '.slide',
     height: '66.66%',
+    enabled: true,
     onInit: function() {},
     onSlideChange: function() {},
     onPan: function() {}
@@ -80,9 +82,7 @@ var SlideHammer = function(elem, options) {
     if (typeof _this.options.height === 'function') setHeight();
   };
   
-  this.initTouch = function() {
-    var touch = new Hammer.Manager(this.elem[0]);
-  
+  this.enableTouch = function() {
     var pan = new Hammer.Pan({
       threshold: 0,
       direction: Hammer.DIRECTION_HORIZONTAL
@@ -110,6 +110,10 @@ var SlideHammer = function(elem, options) {
     });
   };
   
+  this.disableTouch = function() {
+    touch.off('panleft panright panend');
+  };
+  
   function setHeight(transitionTime) {
     var height;
     
@@ -133,7 +137,7 @@ var SlideHammer = function(elem, options) {
   }
   
   this.sizeSlider();
-  this.initTouch();
+  if (this.options.enabled) this.enableTouch();
   
   this.options.onInit.call(this);
   
