@@ -8,6 +8,11 @@
   var SlideHammer = function(elem, options) {
     var _this = this;
     
+    this.options = $.extend({
+      thresholdPercentage: 0.33,
+      thresholdVelocity: 0.5
+    }, options);
+    
     this.elem = $(elem);
     this.wrapper = elem.find('.slide-wrapper');
     this.container = elem.find('.slide-container');
@@ -16,12 +21,10 @@
     this.slideWidth = null;
     this.left = 0;
     this.threshold = 100;
-    this.thresholdPercentage = 0.33;
-    this.thresholdVelocity = 0.5;
     
     this.sizeSlides = function() {
       _this.slideWidth = _this.wrapper.width();
-      _this.threshold = _this.slideWidth * _this.thresholdPercentage;
+      _this.threshold = _this.slideWidth * _this.options.thresholdPercentage;
       _this.slides.each(function() {
         $(this).width(_this.slideWidth);
       });
@@ -42,7 +45,7 @@
       } else {
         _this.currentSlide = _this.currentSlide.next();
         _this.left = _this.currentSlide.index() * -_this.slideWidth;
-        var time = (velocity > _this.thresholdVelocity) ? (1 / velocity) * _this.slideWidth : 500;
+        var time = (velocity > _this.options.thresholdVelocity) ? (1 / velocity) * _this.slideWidth : 500;
         _this.moveTo(_this.left, time);
       }
     };
@@ -53,7 +56,7 @@
       } else {
         _this.currentSlide = _this.currentSlide.prev();
         _this.left = _this.currentSlide.index() * -_this.slideWidth;
-        var time = (velocity < -_this.thresholdVelocity) ? (-1 / velocity) * _this.slideWidth : 500;
+        var time = (velocity < -_this.options.thresholdVelocity) ? (-1 / velocity) * _this.slideWidth : 500;
         _this.moveTo(_this.left, time);
       }
     };
@@ -74,9 +77,9 @@
             _this.moveTo(_this.left + e.deltaX, 0);
             break;
           case 'panend':
-            if (e.deltaX <= -_this.threshold || e.velocityX >= _this.thresholdVelocity) {
+            if (e.deltaX <= -_this.threshold || e.velocityX >= _this.options.thresholdVelocity) {
               _this.nextSlide(e.velocityX);
-            } else if (e.deltaX >= _this.threshold || e.velocityX <= -_this.thresholdVelocity) {
+            } else if (e.deltaX >= _this.threshold || e.velocityX <= -_this.options.thresholdVelocity) {
               _this.prevSlide(e.velocityX);
             } else {
               _this.moveTo(_this.left, 500);
