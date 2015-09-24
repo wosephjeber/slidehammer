@@ -4,10 +4,11 @@
 }
 .slides .slide-wrapper {
   width: 100%;
-  height: 0;
-  padding-bottom: 66.66%;
   overflow: hidden;
   position: relative;
+  transition: height .5s;
+  -moz-transition: height .5s;
+  -webkit-transition: height .5s;
 }
 .slides .slide-container {
   width: 100000px;
@@ -24,6 +25,7 @@
   float: left;
 }
 .slides .slide img {
+  display: block;
   width: 100%;
   height: auto;
   pointer-events: none;

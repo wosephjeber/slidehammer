@@ -47,6 +47,24 @@
         padding: 20px;
         background-color: #efeeea;
       }
+      
+      .indicators {
+        text-align: center;
+      }
+      
+      .indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+        background-color: #8f8e8c;
+        cursor: pointer;
+        border-radius: 100%;
+      }
+      
+      .indicator.current {
+        background-color: #222;
+      }
     </style>
   </head>
   <body>
@@ -69,6 +87,9 @@
                 <img src="demo/alpaca.jpg" alt="" />
               </div>
             </div>
+          </div>
+          <div class="indicators">
+            
           </div>
         </div>
       </div>
@@ -93,10 +114,35 @@
     
     
     <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
-    <script type="text/javascript" src="dist/hammer.min.js"></script>
     <script type="text/javascript" src="dist/slidehammer.min.js"></script>
     <script type="text/javascript">
-      $('.slides').slidehammer();
+      slides = new SlideHammer($('.slides'), {
+        onInit: function() {
+          var slider = this;
+          var slideCount = slider.slides.length;
+          for (var i = 0; i < slideCount; i++) {
+            $('.indicators').append($('<div>', {class: 'indicator'}));
+          }
+          
+          $('.indicator').click(function() {
+            slider.slideTo($(this).index());
+            $('.indicator.current').removeClass('current');
+            $(this).addClass('current');
+          })
+        },
+        onSlideChange: function() {
+          var slider = this;
+          $('.indicator.current').removeClass('current');
+          $('.indicator').eq(slider.currentSlide.index()).addClass('current');
+        },
+        onPan: function(e) {
+          $('.stat-event').html(e.type);
+          $('.stat-delta-x').html(e.deltaX);
+          $('.stat-offset').html(this.left);
+          $('.stat-delta-time').html(e.deltaTime);
+          $('.stat-velocity').html(e.velocityX);
+        }
+      });
     </script>
   </body>
 </html>
