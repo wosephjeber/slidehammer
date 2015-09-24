@@ -38,6 +38,13 @@ module.exports = function(grunt) {
       }
     },
     
+    concat: {
+      production: {
+        src: ['dist/hammer.min.js', 'dist/slidehammer.min.js'],
+        dest: 'dist/slidehammer.min.js'
+      },
+    },
+    
     watch: {
       default: {
         files: ['sass/**/*.scss', 'js/**/*.js'],
@@ -62,6 +69,6 @@ module.exports = function(grunt) {
   grunt.loadNpmTasks('grunt-contrib-concat');
 
   // Default task(s).
-  grunt.registerTask('default', [ 'sass:dev', 'sass:production', 'uglify:production' ] );
+  grunt.registerTask('default', [ 'sass:dev', 'sass:production', 'uglify:production', 'concat:production' ] );
 
 };
