@@ -32,9 +32,7 @@ var SlideHammer = function(elem, options) {
   this.sizeSlides = function() {
     _this.slideWidth = _this.wrapper.width();
     _this.threshold = _this.slideWidth * _this.options.thresholdPercentage;
-    _this.slides.each(function() {
-      $(this).width(_this.slideWidth);
-    });
+    _this.slides.width(_this.slideWidth);
   };
   
   this.moveTo = function(x, time) {
