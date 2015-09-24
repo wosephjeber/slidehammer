@@ -15,6 +15,7 @@ var SlideHammer = function(elem, options) {
     wrapper: '.slide-wrapper',
     container: '.slide-container',
     slide: '.slide',
+    height: '66.66%',
     onInit: function() {},
     onSlideChange: function() {},
     onPan: function() {}
@@ -29,10 +30,11 @@ var SlideHammer = function(elem, options) {
   this.left = 0;
   this.threshold = 100;
   
-  this.sizeSlides = function() {
+  this.sizeSlider = function() {
     _this.slideWidth = _this.wrapper.width();
     _this.threshold = _this.slideWidth * _this.options.thresholdPercentage;
     _this.slides.width(_this.slideWidth);
+    setHeight();
   };
   
   this.moveTo = function(x, time) {
@@ -53,6 +55,7 @@ var SlideHammer = function(elem, options) {
       var time = (velocity > _this.options.thresholdVelocity) ? (1 / velocity) * _this.slideWidth : 500;
       _this.moveTo(_this.left, time);
       _this.options.onSlideChange.call(_this);
+      if (typeof _this.options.height === 'function') setHeight(time);
     }
   };
   
@@ -65,6 +68,7 @@ var SlideHammer = function(elem, options) {
       var time = (velocity < -_this.options.thresholdVelocity) ? (-1 / velocity) * _this.slideWidth : 500;
       _this.moveTo(_this.left, time);
       _this.options.onSlideChange.call(_this);
+      if (typeof _this.options.height === 'function') setHeight(time);
     }
   };
   
@@ -73,6 +77,7 @@ var SlideHammer = function(elem, options) {
     _this.left = _this.currentSlide.index() * -_this.slideWidth;
     _this.moveTo(_this.left, 500);
     _this.options.onSlideChange.call(_this);
+    if (typeof _this.options.height === 'function') setHeight();
   };
   
   this.initTouch = function() {
@@ -105,13 +110,35 @@ var SlideHammer = function(elem, options) {
     });
   };
   
-  this.sizeSlides();
+  function setHeight(transitionTime) {
+    var height;
+    
+    switch(typeof _this.options.height) {
+      case 'number':
+        height = _this.options.height;
+        break;
+      case 'string':
+        height = _this.slideWidth * (parseInt(_this.options.height) / 100);
+        break;
+      case 'function':
+        height = _this.options.height.call(_this, _this.currentSlide);
+        break;
+    }
+    
+    _this.wrapper.css({
+      'height': height,
+      'transition-duration': transitionTime ? (transitionTime + 'ms') : '500ms',
+      '-webkit-transition-duration': transitionTime ? (transitionTime + 'ms') : '500ms'
+    });
+  }
+  
+  this.sizeSlider();
   this.initTouch();
   
   this.options.onInit.call(this);
   
   $(window).on('resize', function() {
-    _this.sizeSlides();
+    _this.sizeSlider();
     _this.moveTo(_this.currentSlide.index() * -_this.slideWidth, 0);
   });
 };
