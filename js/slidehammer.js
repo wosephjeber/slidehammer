@@ -82,7 +82,7 @@ var SlideHammer = function(elem, options) {
     _this.left = _this.currentSlide.index() * -_this.slideWidth;
     _this.moveTo(_this.left, 500);
     _this.options.onSlideChange.call(_this);
-    if (typeof _this.options.height === 'function') setHeight();
+    if (typeof _this.options.height === 'function') setHeight(500);
   };
   
   this.enableTouch = function() {
