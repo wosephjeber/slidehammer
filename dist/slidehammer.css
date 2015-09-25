@@ -2,7 +2,8 @@
   margin-left: auto;
   margin-right: auto;
 }
-.slides .slide-wrapper {
+
+.slide-wrapper {
   width: 100%;
   overflow: hidden;
   position: relative;
@@ -10,7 +11,7 @@
   -moz-transition: height .5s;
   -webkit-transition: height .5s;
 }
-.slides .slide-container {
+.slide-wrapper .slide-container {
   width: 100000px;
   clear: both;
   position: absolute;
@@ -20,11 +21,11 @@
   -moz-transition: transform .5s;
   -webkit-transition: transform .5s;
 }
-.slides .slide {
+.slide-wrapper .slide-container .slide {
   width: 600px;
   float: left;
 }
-.slides .slide img {
+.slide-wrapper .slide-container .slide img {
   display: block;
   width: 100%;
   height: auto;

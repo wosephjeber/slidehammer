@@ -65,6 +65,17 @@
       .indicator.current {
         background-color: #222;
       }
+      
+      .slide {
+        float: left;
+        width: 33.33%;
+        padding: 20px;
+      }
+      
+      .slide img {
+        display: block;
+        width: 100%;
+      }
     </style>
   </head>
   <body>
@@ -87,23 +98,6 @@
           <div class="indicators"></div>
         </div>
       </div>
-      <div class="stats contained centered margin-top-2x">
-        <div class="stat">
-          Event type: <span class="stat-event"></span>
-        </div>
-        <div class="stat">
-          Delta X: <span class="stat-delta-x"></span> px
-        </div>
-        <div class="stat">
-          Slider offset: <span class="stat-offset"></span> px
-        </div>
-        <div class="stat">
-          Delta time: <span class="stat-delta-time"></span> ms
-        </div>
-        <div class="stat">
-          Velocity X: <span class="stat-velocity"></span> px/ms
-        </div>
-      </div>
     </section>
     
     
@@ -111,30 +105,24 @@
     <script type="text/javascript" src="dist/slidehammer.min.js"></script>
     <script type="text/javascript">
       slides = new SlideHammer($('.slides'), {
+        breakpoint: 800,
         onInit: function() {
-          var slider = this;
-          var slideCount = slider.slides.length;
-          for (var i = 0; i < slideCount; i++) {
-            $('.indicators').append($('<div>', {class: 'indicator'}));
-          }
-          
-          $('.indicator').click(function() {
-            slider.slideTo($(this).index());
-            $('.indicator.current').removeClass('current');
-            $(this).addClass('current');
-          })
+          // var slider = this;
+          // var slideCount = slider.slides.length;
+          // for (var i = 0; i < slideCount; i++) {
+          //   $('.indicators').append($('<div>', {class: 'indicator'}));
+          // }
+          // 
+          // $('.indicator').click(function() {
+          //   slider.slideTo($(this).index());
+          //   $('.indicator.current').removeClass('current');
+          //   $(this).addClass('current');
+          // })
         },
         onSlideChange: function() {
-          var slider = this;
-          $('.indicator.current').removeClass('current');
-          $('.indicator').eq(slider.currentSlide.index()).addClass('current');
-        },
-        onPan: function(e) {
-          $('.stat-event').html(e.type);
-          $('.stat-delta-x').html(e.deltaX);
-          $('.stat-offset').html(this.left);
-          $('.stat-delta-time').html(e.deltaTime);
-          $('.stat-velocity').html(e.velocityX);
+          // var slider = this;
+          // $('.indicator.current').removeClass('current');
+          // $('.indicator').eq(slider.currentSlide.index()).addClass('current');
         }
       });
     </script>

@@ -9,23 +9,23 @@
 var SlideHammer = function(elem, options) {
   var _this = this;
   var touch = new Hammer.Manager(elem[0]);
+  var hasStructure = false;
   
   this.options = $.extend({
     thresholdPercentage: 0.33,
     thresholdVelocity: 0.5,
-    wrapper: '.slide-wrapper',
-    container: '.slide-container',
+    wrapperClass: 'slide-wrapper',
+    containerClass: 'slide-container',
     slide: '.slide',
     height: '66.66%',
     enabled: true,
+    breakpoint: null,
     onInit: function() {},
     onSlideChange: function() {},
     onPan: function() {}
   }, options);
   
   this.elem = $(elem);
-  this.wrapper = elem.find(this.options.wrapper);
-  this.container = elem.find(this.options.container);
   this.slides = elem.find(this.options.slide);
   this.currentSlide = this.slides.first();
   this.slideWidth = null;
@@ -33,9 +33,9 @@ var SlideHammer = function(elem, options) {
   this.threshold = 100;
   
   this.sizeSlider = function() {
-    _this.slideWidth = _this.wrapper.width();
+    _this.slideWidth = _this.wrapper.outerWidth();
     _this.threshold = _this.slideWidth * _this.options.thresholdPercentage;
-    _this.slides.width(_this.slideWidth);
+    _this.slides.outerWidth(_this.slideWidth);
     setHeight();
   };
   
@@ -79,7 +79,7 @@ var SlideHammer = function(elem, options) {
     _this.left = _this.currentSlide.index() * -_this.slideWidth;
     _this.moveTo(_this.left, 500);
     _this.options.onSlideChange.call(_this);
-    if (typeof _this.options.height === 'function') setHeight();
+    if (typeof _this.options.height === 'function') setHeight(500);
   };
   
   this.enableTouch = function() {
@@ -136,13 +136,62 @@ var SlideHammer = function(elem, options) {
     });
   }
   
-  this.sizeSlider();
-  if (this.options.enabled) this.enableTouch();
+  function setup() {
+    if (_this.options.enabled) {
+      buildSlider();
+      _this.sizeSlider();
+      _this.moveTo(_this.currentSlide.index() * -_this.slideWidth, 0);
+    }
+  }
+  
+  function takedown() {
+    if (_this.options.enabled) {
+      demolishSlider();
+    }
+  }
+  
+  function buildSlider() {
+    if (!hasStructure) {
+      var wrapper = $('<div>', {class: _this.options.wrapperClass});
+      var container = $('<div>', {class: _this.options.containerClass});
+      wrapper.insertBefore(_this.slides.first()).append(container.append(_this.slides.detach()));
+      
+      _this.wrapper = elem.find('.' + _this.options.wrapperClass);
+      _this.container = elem.find('.' + _this.options.containerClass);
+      
+      _this.enableTouch();
+      
+      hasStructure = true;
+    }
+  }
+  
+  function demolishSlider() {
+    if (hasStructure) {
+      _this.wrapper.after(_this.slides.width('').detach()).remove();
+      
+      _this.disableTouch();
+      
+      hasStructure = false;
+    }
+  }
+  
+  function checkBreakpoint() {
+    return (_this.options.breakpoint && $(window).width() <= _this.options.breakpoint) || _this.options.breakpoint === null;
+  }
+  
+  if (checkBreakpoint()) {
+    setup();
+  }  else {
+    takedown();
+  }
   
   this.options.onInit.call(this);
   
   $(window).on('resize', function() {
-    _this.sizeSlider();
-    _this.moveTo(_this.currentSlide.index() * -_this.slideWidth, 0);
+    if (checkBreakpoint()) {
+      setup();
+    }  else {
+      takedown();
+    }
   });
 };
