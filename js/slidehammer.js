@@ -8,7 +8,7 @@
 
 var SlideHammer = function(elem, options) {
   var _this = this;
-  var touch = new Hammer.Manager(elem[0]);
+  var touch;
   var hasStructure = false;
   
   this.options = $.extend({
@@ -83,12 +83,6 @@ var SlideHammer = function(elem, options) {
   };
   
   this.enableTouch = function() {
-    var pan = new Hammer.Pan({
-      threshold: 0,
-      direction: Hammer.DIRECTION_HORIZONTAL
-    });
-    touch.add([pan]);
-
     touch.on('panleft panright panend', function(e) {
       switch(e.type) {
         case 'panleft':
@@ -114,6 +108,15 @@ var SlideHammer = function(elem, options) {
     touch.off('panleft panright panend');
   };
   
+  function setupTouch() {
+    touch = new Hammer.Manager(elem[0]);
+    var pan = new Hammer.Pan({
+      threshold: 0,
+      direction: Hammer.DIRECTION_HORIZONTAL
+    });
+    touch.add([pan]);
+  }
+  
   function setHeight(transitionTime) {
     var height;
     
@@ -138,6 +141,7 @@ var SlideHammer = function(elem, options) {
   
   function setup() {
     if (_this.options.enabled) {
+      setupTouch();
       buildSlider();
       _this.sizeSlider();
       _this.moveTo(_this.currentSlide.index() * -_this.slideWidth, 0);
