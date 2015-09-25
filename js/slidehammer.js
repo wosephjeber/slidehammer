@@ -9,12 +9,13 @@
 var SlideHammer = function(elem, options) {
   var _this = this;
   var touch = new Hammer.Manager(elem[0]);
+  var hasStructure = false;
   
   this.options = $.extend({
     thresholdPercentage: 0.33,
     thresholdVelocity: 0.5,
-    wrapper: '.slide-wrapper',
-    container: '.slide-container',
+    wrapperClass: 'slide-wrapper',
+    containerClass: 'slide-container',
     slide: '.slide',
     height: '66.66%',
     enabled: true,
@@ -25,15 +26,11 @@ var SlideHammer = function(elem, options) {
   }, options);
   
   this.elem = $(elem);
-  this.wrapper = elem.find(this.options.wrapper);
-  this.container = elem.find(this.options.container);
   this.slides = elem.find(this.options.slide);
   this.currentSlide = this.slides.first();
   this.slideWidth = null;
   this.left = 0;
   this.threshold = 100;
-  
-  var hasStructure = (this.wrapper.length > 0);
   
   this.sizeSlider = function() {
     _this.slideWidth = _this.wrapper.outerWidth();
@@ -155,12 +152,12 @@ var SlideHammer = function(elem, options) {
   
   function buildSlider() {
     if (!hasStructure) {
-      var wrapper = $('<div>', {class: 'slide-wrapper'});
-      var container = $('<div>', {class: 'slide-container'});
+      var wrapper = $('<div>', {class: _this.options.wrapperClass});
+      var container = $('<div>', {class: _this.options.containerClass});
       wrapper.insertBefore(_this.slides.first()).append(container.append(_this.slides.detach()));
       
-      _this.wrapper = elem.find('.slide-wrapper');
-      _this.container = elem.find('.slide-container');
+      _this.wrapper = elem.find('.' + _this.options.wrapperClass);
+      _this.container = elem.find('.' + _this.options.containerClass);
       
       _this.enableTouch();
       
