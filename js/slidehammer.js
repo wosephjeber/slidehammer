@@ -141,7 +141,7 @@ var SlideHammer = function(elem, options) {
   
   function setup() {
     if (_this.options.enabled) {
-      wrapSlides();
+      buildSlider();
       _this.sizeSlider();
       _this.moveTo(_this.currentSlide.index() * -_this.slideWidth, 0);
     }
@@ -149,16 +149,17 @@ var SlideHammer = function(elem, options) {
   
   function takedown() {
     if (_this.options.enabled) {
-      unwrapSlides();
+      demolishSlider();
     }
   }
   
-  function wrapSlides() {
+  function buildSlider() {
     if (!hasStructure) {
       var wrapper = $('<div>', {class: 'slide-wrapper'});
       var container = $('<div>', {class: 'slide-container'});
       wrapper.append(container);
-      _this.slides.first().before(wrapper);
+      wrapper.insertBefore(_this.slides.first());
+      
       _this.slides.detach();
       container.append(_this.slides);
       
@@ -171,7 +172,7 @@ var SlideHammer = function(elem, options) {
     }
   }
   
-  function unwrapSlides() {
+  function demolishSlider() {
     if (hasStructure) {
       _this.slides.width('');
       _this.slides.detach();
