@@ -36,9 +36,9 @@ var SlideHammer = function(elem, options) {
   var hasStructure = (this.wrapper.length > 0);
   
   this.sizeSlider = function() {
-    _this.slideWidth = _this.wrapper.width();
+    _this.slideWidth = _this.wrapper.outerWidth();
     _this.threshold = _this.slideWidth * _this.options.thresholdPercentage;
-    _this.slides.width(_this.slideWidth);
+    _this.slides.outerWidth(_this.slideWidth);
     setHeight();
   };
   
