@@ -157,11 +157,7 @@ var SlideHammer = function(elem, options) {
     if (!hasStructure) {
       var wrapper = $('<div>', {class: 'slide-wrapper'});
       var container = $('<div>', {class: 'slide-container'});
-      wrapper.append(container);
-      wrapper.insertBefore(_this.slides.first());
-      
-      _this.slides.detach();
-      container.append(_this.slides);
+      wrapper.insertBefore(_this.slides.first()).append(container.append(_this.slides.detach()));
       
       _this.wrapper = elem.find('.slide-wrapper');
       _this.container = elem.find('.slide-container');
@@ -174,11 +170,7 @@ var SlideHammer = function(elem, options) {
   
   function demolishSlider() {
     if (hasStructure) {
-      _this.slides.width('');
-      _this.slides.detach();
-      _this.wrapper.after(_this.slides);
-      _this.wrapper.remove();
-      _this.container.remove();
+      _this.wrapper.after(_this.slides.width('').detach()).remove();
       
       _this.disableTouch();
       
