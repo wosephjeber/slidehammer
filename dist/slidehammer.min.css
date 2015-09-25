@@ -3,7 +3,8 @@
  */
 
 .slides { margin-left: auto; margin-right: auto; }
-.slides .slide-wrapper { width: 100%; overflow: hidden; position: relative; transition: height .5s; -moz-transition: height .5s; -webkit-transition: height .5s; }
-.slides .slide-container { width: 100000px; clear: both; position: absolute; top: 0; left: 0; transition: transform .5s; -moz-transition: transform .5s; -webkit-transition: transform .5s; }
-.slides .slide { width: 600px; float: left; }
-.slides .slide img { display: block; width: 100%; height: auto; pointer-events: none; }
+
+.slide-wrapper { width: 100%; overflow: hidden; position: relative; transition: height .5s; -moz-transition: height .5s; -webkit-transition: height .5s; }
+.slide-wrapper .slide-container { width: 100000px; clear: both; position: absolute; top: 0; left: 0; transition: transform .5s; -moz-transition: transform .5s; -webkit-transition: transform .5s; }
+.slide-wrapper .slide-container .slide { width: 600px; float: left; }
+.slide-wrapper .slide-container .slide img { display: block; width: 100%; height: auto; pointer-events: none; }

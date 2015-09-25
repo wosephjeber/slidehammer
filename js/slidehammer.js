@@ -18,6 +18,7 @@ var SlideHammer = function(elem, options) {
     slide: '.slide',
     height: '66.66%',
     enabled: true,
+    breakpoint: null,
     onInit: function() {},
     onSlideChange: function() {},
     onPan: function() {}
@@ -31,6 +32,8 @@ var SlideHammer = function(elem, options) {
   this.slideWidth = null;
   this.left = 0;
   this.threshold = 100;
+  
+  var hasStructure = (this.wrapper.length > 0);
   
   this.sizeSlider = function() {
     _this.slideWidth = _this.wrapper.width();
@@ -136,13 +139,69 @@ var SlideHammer = function(elem, options) {
     });
   }
   
-  this.sizeSlider();
-  if (this.options.enabled) this.enableTouch();
+  function setup() {
+    if (_this.options.enabled) {
+      wrapSlides();
+      _this.sizeSlider();
+      _this.moveTo(_this.currentSlide.index() * -_this.slideWidth, 0);
+    }
+  }
+  
+  function takedown() {
+    if (_this.options.enabled) {
+      unwrapSlides();
+    }
+  }
+  
+  function wrapSlides() {
+    if (!hasStructure) {
+      var wrapper = $('<div>', {class: 'slide-wrapper'});
+      var container = $('<div>', {class: 'slide-container'});
+      wrapper.append(container);
+      _this.slides.first().before(wrapper);
+      _this.slides.detach();
+      container.append(_this.slides);
+      
+      _this.wrapper = elem.find('.slide-wrapper');
+      _this.container = elem.find('.slide-container');
+      
+      _this.enableTouch();
+      
+      hasStructure = true;
+    }
+  }
+  
+  function unwrapSlides() {
+    if (hasStructure) {
+      _this.slides.width('');
+      _this.slides.detach();
+      _this.wrapper.after(_this.slides);
+      _this.wrapper.remove();
+      _this.container.remove();
+      
+      _this.disableTouch();
+      
+      hasStructure = false;
+    }
+  }
+  
+  function checkBreakpoint() {
+    return (_this.options.breakpoint && $(window).width() <= _this.options.breakpoint) || _this.options.breakpoint === null;
+  }
+  
+  if (checkBreakpoint()) {
+    setup();
+  }  else {
+    takedown();
+  }
   
   this.options.onInit.call(this);
   
   $(window).on('resize', function() {
-    _this.sizeSlider();
-    _this.moveTo(_this.currentSlide.index() * -_this.slideWidth, 0);
+    if (checkBreakpoint()) {
+      setup();
+    }  else {
+      takedown();
+    }
   });
 };

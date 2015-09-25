@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>SlideHammer Demo</title>
+    
+    <link rel="stylesheet" href="dist/slidehammer.min.css">
+    
+    <style>
+      * {
+        box-sizing: border-box;
+        -moz-box-sizing: border-box;
+        -webkit-box-sizing: border-box;
+        -ms-box-sizing: border-box;
+      }
+      
+      body {
+        color: #333;
+        font-family: Arial, sans-serif;
+      }
+    
+      .contained {
+        max-width: 640px
+      }
+      
+      .centered {
+        margin-left: auto;
+        margin-right: auto;
+      }
+      
+      .padding-2x {
+        padding: 40px;
+      }
+      
+      @media (max-width: 480px) {
+        .padding-2x {
+          padding: 20px;
+        }
+      }
+      
+      .margin-top-2x {
+        margin-top: 40px;
+      }
+      
+      .stats {
+        padding: 20px;
+        background-color: #efeeea;
+      }
+      
+      .indicators {
+        text-align: center;
+      }
+      
+      .indicator {
+        display: inline-block;
+        width: 10px;
+        height: 10px;
+        margin: 0 5px;
+        background-color: #8f8e8c;
+        cursor: pointer;
+        border-radius: 100%;
+      }
+      
+      .indicator.current {
+        background-color: #222;
+      }
+      
+      .slide {
+        float: left;
+        width: 33.33%;
+      }
+      
+      .slide img {
+        display: block;
+        width: 100%;
+      }
+    </style>
+  </head>
+  <body>
+    <section class="padding-2x">
+      <div class="contained centered">
+        <h1>SlideHammer</h1>
+        <p>
+          A demo of an experimental slider using hammer.js.
+        </p>
+        <div class="slides">
+          <div class="slide">
+            <img src="demo/otters.jpg" alt="" />
+          </div>
+          <div class="slide">
+            <img src="demo/red-panda-sleeping.jpg" alt="" />
+          </div>
+          <div class="slide">
+            <img src="demo/alpaca.jpg" alt="" />
+          </div>
+          <div class="indicators"></div>
+        </div>
+      </div>
+    </section>
+    
+    
+    <script type="text/javascript" src="https://code.jquery.com/jquery-1.11.3.min.js"></script>
+    <script type="text/javascript" src="dist/slidehammer.min.js"></script>
+    <script type="text/javascript">
+      slides = new SlideHammer($('.slides'), {
+        breakpoint: 800,
+        onInit: function() {
+          // var slider = this;
+          // var slideCount = slider.slides.length;
+          // for (var i = 0; i < slideCount; i++) {
+          //   $('.indicators').append($('<div>', {class: 'indicator'}));
+          // }
+          // 
+          // $('.indicator').click(function() {
+          //   slider.slideTo($(this).index());
+          //   $('.indicator.current').removeClass('current');
+          //   $(this).addClass('current');
+          // })
+        },
+        onSlideChange: function() {
+          // var slider = this;
+          // $('.indicator.current').removeClass('current');
+          // $('.indicator').eq(slider.currentSlide.index()).addClass('current');
+        }
+      });
+    </script>
+  </body>
+</html>
