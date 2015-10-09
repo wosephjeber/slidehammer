@@ -41,7 +41,7 @@ module.exports = function(grunt) {
     concat: {
       production: {
         src: ['dist/hammer.min.js', 'dist/slidehammer.min.js'],
-        dest: 'dist/slidehammer.min.js'
+        dest: 'dist/slidehammer.pkgd.min.js'
       },
     },
     
