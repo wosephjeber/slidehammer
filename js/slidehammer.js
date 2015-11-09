@@ -191,7 +191,7 @@ var SlideHammer = function(elem, options) {
   
   this.options.onInit.call(this);
   
-  $(window).on('resize', function() {
+  $(window).on('resize.slidehammer', function() {
     if (checkBreakpoint()) {
       setup();
     }  else {
